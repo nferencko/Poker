@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Texas Hold'em</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="toast"></div>
+<div class="sound"><button id="btnMusic" title="Toggle music">🎵</button><button id="btnSfx" title="Toggle sound effects">🔊</button></div>
+
+<!-- VOICE CHAT (multiplayer only) -->
+<div id="voicePanel" class="voice hidden">
+  <div class="vhead">
+    <button id="vToggle">🎙 Voice: Off</button>
+    <button id="vMute" class="hidden">🎤 Mute</button>
+  </div>
+  <ul id="vList"></ul>
+  <p class="hint" id="vNote"></p>
+</div>
+
+<!-- MENU -->
+<section id="menu" class="screen">
+  <h1>♠ Texas Hold'em ♥</h1>
+  <p class="sub">No-limit, Vegas cash-game rules</p>
+  <div class="card-panel">
+    <label>Your name <input id="name" maxlength="16" placeholder="Player"></label>
+    <button class="primary" id="btnSingle">Single Player</button>
+    <button class="primary" id="btnHost">Host Multiplayer Game</button>
+    <div class="row">
+      <input id="joinCode" maxlength="5" placeholder="GAME CODE" style="text-transform:uppercase">
+      <button id="btnJoin">Join</button>
+    </div>
+    <p class="err" id="menuErr"></p>
+  </div>
+</section>
+
+<!-- SINGLE SETUP -->
+<section id="single" class="screen hidden">
+  <h2>Single Player</h2>
+  <div class="card-panel">
+    <label>Opponents (1–9)
+      <input type="range" id="nBots" min="1" max="9" value="3"> <b id="nBotsLbl">3</b>
+    </label>
+    <label>Starting balance (everyone starts with this) <input type="number" id="myBal" min="10" value="1000"></label>
+    <p class="hint" id="aiNote"></p>
+    <div class="row"><button id="singleBack">Back</button><button class="primary" id="singleGo">Deal me in</button></div>
+  </div>
+</section>
+
+<!-- HOST SETUP -->
+<section id="hostSetup" class="screen hidden">
+  <h2>Host a Game</h2>
+  <div class="card-panel">
+    <label>Starting balance for every player <input type="number" id="hostBal" min="10" value="1000"></label>
+    <label>Human players (1–10) <input type="range" id="hostHumans" min="1" max="10" value="2"> <b id="hostHumansLbl">2</b></label>
+    <label>AI players (0–9) <input type="range" id="hostAi" min="0" max="9" value="0"> <b id="hostAiLbl">0</b></label>
+    <p class="hint" id="hostTotal"></p>
+    <div class="row"><button id="hostBack">Back</button><button class="primary" id="hostGo">Create game</button></div>
+  </div>
+</section>
+
+<!-- LOBBY -->
+<section id="lobby" class="screen hidden">
+  <h2>Lobby</h2>
+  <div class="card-panel">
+    <p>Game code</p>
+    <div class="code" id="lobbyCode">-----</div>
+    <button id="copyCode">Copy code</button>
+    <p class="hint">Share this code with your friends.</p>
+    <ul id="lobbyPlayers"></ul>
+    <label id="lobbyBalRow">Starting balance <input type="number" id="lobbyBal" min="10"></label>
+    <p id="lobbyBalView"></p>
+    <label id="lobbyHumansRow">Human players <input type="range" id="lobbyHumans" min="1" max="10" value="2"> <b id="lobbyHumansLbl">2</b></label>
+    <label id="lobbyAiRow">AI players <input type="range" id="lobbyAi" min="0" max="9" value="0"> <b id="lobbyAiLbl">0</b></label>
+    <p id="lobbyAiView"></p>
+    <div class="row"><button id="lobbyLeave">Leave</button><button class="primary" id="lobbyStart">Start game</button></div>
+    <p class="hint" id="lobbyWait"></p>
+  </div>
+</section>
+
+<!-- GAME -->
+<section id="game" class="screen hidden">
+  <div class="topbar">
+    <span id="gInfo"></span>
+    <span id="gCode"></span>
+    <button id="gLeave">Leave</button>
+  </div>
+  <div class="tablewrap">
+    <div class="table" id="table">
+      <div class="center">
+        <div id="pot" class="pot"></div>
+        <div id="board" class="cards"></div>
+        <div id="banner" class="banner"></div>
+      </div>
+    </div>
+  </div>
+  <div id="spectate" class="spectate hidden"></div>
+  <div id="actions" class="actions hidden">
+    <div id="timer"></div>
+    <div class="row">
+      <button id="aFold" class="fold">Fold</button>
+      <button id="aCall" class="call">Check</button>
+    </div>
+    <div class="row raise" id="raiseRow">
+      <input type="range" id="raiseSlider">
+      <input type="number" id="raiseNum">
+      <button id="aRaise" class="raise-btn">Raise</button>
+    </div>
+    <div class="row presets" id="presets">
+      <button data-p="min">Min</button><button data-p="0.5">½ pot</button><button data-p="1">Pot</button><button data-p="max">All-in</button>
+    </div>
+  </div>
+  <div id="log" class="log"></div>
+</section>
+
+<!-- GAME OVER -->
+<div id="overModal" class="modal hidden">
+  <div class="card-panel"><h2 id="overTitle"></h2><button class="primary" id="overBtn">Back to menu</button></div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="audio.js"></script>
+<script src="voice.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "name": "texas-holdem",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Texas Hold'em (Vegas no-limit rules): single player vs AI, or multiplayer with game codes",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "test": "node test/sim.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "socket.io": "^4.7.5"
+  }
+}
