@@ -85,3 +85,16 @@ button.primary { background: var(--gold); color:#222; font-weight:700; }
 .table.many .mystack { display:none }
 #lobbyPlayers li.dim { opacity:.5 }
 @media (max-width:600px){ .table.many{aspect-ratio:3/4} .table.many .seat{min-width:62px;font-size:.66rem} .table.many .seat .nm{max-width:60px} }
+
+/* rules page */
+.card-panel.rules { max-width: 720px; line-height: 1.5; gap: 6px }
+.rules h3 { color: var(--gold); margin: 14px 0 2px }
+.rules p, .rules li { color: #d5dee6; font-size: .95rem }
+.rules ol, .rules ul { margin: 4px 0; padding-left: 22px }
+.rules li { margin-bottom: 4px }
+.rules .dealer { margin-left: 0 }
+.rank { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:8px 0; border-bottom:1px solid #2b3846; flex-wrap:wrap }
+.rank .rname { display:flex; flex-direction:column; flex:1; min-width:200px }
+.rank .rname span { color:#9fb0bf; font-size:.82rem }
+.rank .cards { min-height:0; justify-content:flex-start }
+.rules .primary { margin-top: 14px }

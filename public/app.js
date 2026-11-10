@@ -10,7 +10,7 @@ const myName = () => { const n = $('name').value.trim() || 'Player'; localStorag
 
 function show(id) {
   if (!['lobby', 'game'].includes(id)) { Voice.disable(); $('voicePanel').classList.add('hidden'); }
-  ['menu', 'single', 'hostSetup', 'lobby', 'game'].forEach(s => $(s).classList.toggle('hidden', s !== id));
+  ['menu', 'single', 'hostSetup', 'lobby', 'game', 'rules'].forEach(s => $(s).classList.toggle('hidden', s !== id));
   $('overModal').classList.add('hidden');
 }
 function toast(msg) { const t = $('toast'); t.textContent = msg; t.style.display = 'block'; clearTimeout(toast.t); toast.t = setTimeout(() => (t.style.display = 'none'), 3000); }
@@ -22,6 +22,26 @@ fetch('/api/config').then(r => r.json()).then(c => (cfg = c)).catch(() => {});
 // ---------- menu ----------
 $('btnSingle').onclick = () => { $('aiNote').textContent = cfg.claude ? 'Opponents are powered by Claude.' : 'Opponents use the free built-in poker AI.'; show('single'); };
 $('btnHost').onclick = () => show('hostSetup');
+$('btnRules').onclick = () => { renderRankings(); show('rules'); window.scrollTo(0, 0); };
+$('rulesBack').onclick = () => show('menu');
+
+// example hands for the rules page (s/h/d/c = suit, r = rank 2-14)
+const RANKINGS = [
+  ['Royal Flush', 'Ten through Ace, all the same suit.', [[14,'s'],[13,'s'],[12,'s'],[11,'s'],[10,'s']]],
+  ['Straight Flush', 'Five cards in a row, all the same suit.', [[9,'h'],[8,'h'],[7,'h'],[6,'h'],[5,'h']]],
+  ['Four of a Kind', 'Four cards of the same rank.', [[9,'s'],[9,'h'],[9,'d'],[9,'c'],[3,'s']]],
+  ['Full House', 'Three of one rank plus a pair.', [[13,'s'],[13,'h'],[13,'d'],[4,'c'],[4,'s']]],
+  ['Flush', 'Any five cards of the same suit.', [[14,'d'],[11,'d'],[8,'d'],[6,'d'],[2,'d']]],
+  ['Straight', 'Five cards in a row, mixed suits.', [[10,'c'],[9,'h'],[8,'d'],[7,'s'],[6,'c']]],
+  ['Three of a Kind', 'Three cards of the same rank.', [[7,'s'],[7,'h'],[7,'d'],[13,'c'],[2,'s']]],
+  ['Two Pair', 'Two different pairs.', [[12,'s'],[12,'h'],[5,'d'],[5,'c'],[14,'s']]],
+  ['Pair', 'Two cards of the same rank.', [[10,'s'],[10,'h'],[14,'d'],[8,'c'],[3,'s']]],
+  ['High Card', 'None of the above: your highest card plays.', [[14,'s'],[11,'h'],[8,'d'],[6,'c'],[3,'s']]],
+];
+function renderRankings() {
+  $('rankList').innerHTML = RANKINGS.map((r, i) =>
+    `<div class="rank"><div class="rname"><b>${i + 1}. ${r[0]}</b><span>${r[1]}</span></div><div class="cards">${r[2].map(c => cardHTML({ r: c[0], s: c[1] })).join('')}</div></div>`).join('');
+}
 $('btnJoin').onclick = () => {
   const code = $('joinCode').value.trim().toUpperCase();
   if (code.length < 5) { $('menuErr').textContent = 'Enter the 5-letter game code.'; return; }

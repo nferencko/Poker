@@ -33,7 +33,52 @@
       <input id="joinCode" maxlength="5" placeholder="GAME CODE" style="text-transform:uppercase">
       <button id="btnJoin">Join</button>
     </div>
+    <button id="btnRules">📖 How to play / Rules</button>
     <p class="err" id="menuErr"></p>
+  </div>
+</section>
+
+<!-- RULES -->
+<section id="rules" class="screen hidden">
+  <h2>How to Play Texas Hold'em</h2>
+  <div class="card-panel rules">
+    <h3>Goal</h3>
+    <p>Win chips by having the best five-card hand at the end, or by getting everyone else to fold. You make your hand from your <b>2 private cards</b> and the <b>5 shared cards</b> in the middle, using any combination of the seven.</p>
+
+    <h3>How a hand plays out</h3>
+    <ol>
+      <li><b>Blinds.</b> A dealer button (<span class="dealer">D</span>) moves one seat each hand. The next two players post forced bets: the <b>small blind</b> and the <b>big blind</b>. Heads-up (two players), the button posts the small blind.</li>
+      <li><b>Hole cards.</b> Everyone gets two cards face down.</li>
+      <li><b>Pre-flop betting.</b> Starting left of the big blind, each player folds, calls or raises.</li>
+      <li><b>The flop.</b> Three shared cards are dealt face up, followed by a betting round.</li>
+      <li><b>The turn.</b> A fourth shared card, then another betting round.</li>
+      <li><b>The river.</b> The fifth and last shared card, then the final betting round.</li>
+      <li><b>Showdown.</b> Players still in reveal their cards and the best hand takes the pot. Ties split it. A card is burned (discarded) before the flop, turn and river.</li>
+    </ol>
+
+    <h3>Your options</h3>
+    <ul>
+      <li><b>Fold:</b> give up your hand and any chips you have put in.</li>
+      <li><b>Check:</b> pass without betting (only if nobody has bet this round).</li>
+      <li><b>Call:</b> match the current bet.</li>
+      <li><b>Bet / Raise:</b> put in more. This is <b>no-limit</b>: you can bet any amount up to all your chips. A raise must be at least as big as the last bet or raise in that round.</li>
+      <li><b>All-in:</b> bet every chip you have. If you cannot cover a bet, you can still call all-in and play for the part of the pot you matched.</li>
+    </ul>
+    <p>When players are all-in for different amounts, the extra chips go into <b>side pots</b> that only the players who matched them can win. A short all-in that is smaller than a full raise does not reopen the betting for players who have already acted.</p>
+
+    <h3>Hand rankings (best to worst)</h3>
+    <div id="rankList"></div>
+    <p class="hint">If two players have the same type of hand, the higher cards win. If the five best cards are identical, the pot is split. Suits are never ranked against each other. An Ace can be high or low in a straight (A-2-3-4-5 is the lowest straight).</p>
+
+    <h3>In this game</h3>
+    <ul>
+      <li>Everyone starts with the same chip balance. Blinds are fixed at about 2% of the average starting stack.</li>
+      <li>Up to <b>10 players</b> at a table, any mix of humans and AI.</li>
+      <li>In multiplayer you have <b>45 seconds</b> per turn before you are auto-folded (or auto-checked if checking is free).</li>
+      <li>Run out of chips and you are out of the game: you can keep watching as a spectator or leave. The last player with chips wins.</li>
+      <li>In multiplayer, the 🎙 voice panel (bottom-left) lets you talk with other players and mute your mic.</li>
+    </ul>
+    <button class="primary" id="rulesBack">Back to menu</button>
   </div>
 </section>
 
