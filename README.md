@@ -1,5 +1,9 @@
 # Texas Hold'em
 
+**Play it live: https://poker-yqb9.onrender.com/**
+
+_Hosted on a free Render plan: if the page has been idle, the first load can take 30–60 seconds while it wakes up._
+
 No-limit Texas Hold'em with Vegas cash-game rules (dealer button, small/big blind, burn cards, min-raise = last raise, short all-in doesn't reopen betting, side pots).
 
 - **Single player**: 1–9 AI opponents (10 seats max); one starting balance applies to everyone.
